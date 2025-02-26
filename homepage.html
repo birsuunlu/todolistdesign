@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage.css">
+
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="head">
+            <p>
+                Today
+            </p>
+        </div>
+        <div class="body">
+            <div class="title">DESIGN</div>
+
+
+            <label class="button">
+                <input type="checkbox" class="checkbox" />
+                Create icons for a dashboard
+            </label>
+
+            <label class="button">
+                <input type="checkbox" class="checkbox" />
+                Prepare a design presentation
+            </label>
+
+            <div class="title">PERSONAL</div>
+
+            <label class="button">
+                <input type="checkbox" class="checkbox" />
+                Stretch for 15 minutes
+            </label>
+
+            <label class="button">
+                <input type="checkbox" class="checkbox" />
+                Plan your meal
+            </label>
+
+            <label class="button">
+                <input type="checkbox" class="checkbox" />
+                Review daily goals before sleeping.
+                <br> Add some new if time permits
+            </label>
+
+            <div class="title">HOUSE</div>
+
+            <label class="button">
+                <input type="checkbox" class="checkbox" />
+                Water indoor plants
+            </label>
+
+            <div class="task">
+                <input type="text" class="task-input" placeholder="Write a task..." />
+                <button class="add-button" onclick="buttonClicked()">Add</button>
+             </div>
+        </div>
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function addTask() {
+                const input = document.querySelector('.task-input'); 
+                const taskText = input.value.trim(); 
+
+                if (taskText) { 
+                    const body = document.querySelector('.body'); 
+
+                    const label = document.createElement('label'); 
+                    label.className = 'button';
+                    label.innerHTML = `
+                        <input type="checkbox" class="checkbox" />
+                        ${taskText}
+                    `;
+
+                    body.appendChild(label); 
+                    input.value = ""; 
+                } else {
+                    alert("Please enter a task."); 
+                }
+            }
+            document.querySelector('.add-button').addEventListener('click', addTask);
+        });
+
+    </script>
+</body>
+
+</html>

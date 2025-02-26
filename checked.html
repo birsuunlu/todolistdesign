@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="checked.css">
+
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="head">
+            <p>
+                Personal
+            </p>
+        </div>
+        <div class="body">
+                <label class="button">
+                    <input type="checkbox" class="checkbox" />
+                    Drink 8 glasses of water
+                </label>
+
+                <label class="button">
+                    <input type="checkbox" class="checkbox" />
+                    Meditate for 10 minutes
+                </label>
+
+                <label class="button">
+                    <input type="checkbox" class="checkbox" />
+                    Read a chapter of a book
+                </label>
+
+                <label class="button">
+                    <input type="checkbox" class="checkbox" />
+                    Go for a 30-minute walk
+                </label>
+
+                <label class="button">
+                    <input type="checkbox" class="checkbox" />
+                    Write in a gratitude journal
+                </label>
+
+
+                <div class="title">COMPLETED</div>
+                <label class="private-button">
+                    <input type="checkbox" class="checkbox" checked  />
+                    Plan meals for the day
+                </label>
+
+                <label class="private-button">
+                    <input type="checkbox" class="checkbox" checked />
+                    Practice deep breathing exercises
+                </label>
+
+                <label class="private-button">
+                    <input type="checkbox" class="checkbox" checked />
+                    Stretch for 15 minutes
+                </label>
+
+                <label class="private-button">
+                    <input type="checkbox" class="checkbox" checked />
+                    Limit screen time before bed
+                </label>
+
+            </div>
+            <div class="task">
+                <input type="text" class="task-input" placeholder="Write a task..." />
+                <button class="add-button" onclick="addTask(this)">Add</button>            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function addTask() {
+                const input = document.querySelector('.task-input'); 
+                const taskText = input.value.trim(); 
+
+                if (taskText) { 
+                    const body = document.querySelector('.body'); 
+
+                    const label = document.createElement('label'); 
+                    label.className = 'button';
+                    label.innerHTML = `
+                        <input type="checkbox" class="checkbox" />
+                        ${taskText}
+                    `;
+                    const checkboxes = body.querySelectorAll('.checkbox:not(:checked)');
+                    if (checkboxes.length > 0) {
+                        body.insertBefore(label, checkboxes[0].parentElement);
+                    } else {
+                        body.appendChild(label);
+                    }
+                   
+                    input.value = ""; 
+                } else {
+                    alert("Please enter a task."); 
+                }
+                document.querySelectorAll('.checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const label = this.parentElement;
+                    if (this.checked) {
+                        label.classList.add('completed');
+                        label.parentElement.appendChild(label); 
+                    } else {
+                        label.classList.remove('completed');
+                        const checkboxes = body.querySelectorAll('.checkbox:not(:checked)');
+                        if (checkboxes.length > 0) {
+                            body.insertBefore(label, checkboxes[0].parentElement); 
+                        } else {
+                            body.appendChild(label); 
+                        }
+                    }
+                });
+            });
+            }
+            document.querySelector('.add-button').addEventListener('click', addTask);
+        });
+    </script>
+
+</body>
+
+</html>
+
